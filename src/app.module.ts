@@ -6,6 +6,8 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtModule } from '@nestjs/jwt';
+import { DmiModule } from './dmi/dmi.module';
+import { PdfService } from './pdf/pdf.service';
 
 @Module({
   imports: [
@@ -18,8 +20,9 @@ import { JwtModule } from '@nestjs/jwt';
       secret: process.env.AUTH_SECRET,
       signOptions: { expiresIn: '3600s' },
     }),
+    DmiModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PdfService],
 })
 export class AppModule { }
