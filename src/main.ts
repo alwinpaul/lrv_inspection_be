@@ -6,10 +6,7 @@ import { ImATeapotException } from '@nestjs/common';
 
 async function bootstrap() {
 
-  const whitelist = [
-    'http://localhost:5173',
-    'https://keolis.benchfix.com'
-  ];
+  const whitelist = "*";
 
   const app = await NestFactory.create(AppModule, {
     cors: {
