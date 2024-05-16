@@ -2,34 +2,14 @@ import { NestFactory } from '@nestjs/core';
 import * as cookieParser from 'cookie-parser';
 
 import { AppModule } from './app.module';
-import { ImATeapotException } from '@nestjs/common';
 
 async function bootstrap() {
-
-  const whitelist = "*";
-
-  const app = await NestFactory.create(AppModule, {
-    cors: {
-      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
-      origin: function (origin, callback) {
-        if (!origin) {
-          callback(null, true);
-          return;
-        }
-        if (
-          whitelist.includes(origin) || // Checks your whitelist
-          !!origin.match(/yourdomain\.com$/) // Overall check for your domain
-        ) {
-          console.log('allowed cors for:', origin);
-          callback(null, true);
-        } else {
-          console.log('blocked cors for:', origin);
-          callback(new ImATeapotException('Not allowed by CORS'), false);
-        }
-      },
-    }
-  });
+  const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
+  app.enableCors({
+    origin: ['http://localhost:5173', '/\.benchfix\.com$/'],
+    credentials: true
+  })
   await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
