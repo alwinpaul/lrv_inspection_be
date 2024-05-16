@@ -1,16 +1,19 @@
 .w83 {
-    width: 83%;
+    width: 500px;
 }
 
 .w40 {
-    width: 40%;
+    width: 300px;
 }
+
 .w30 {
     width: 30%;
 }
+
 .w20 {
     width: 20%;
 }
+
 .w90 {
     width: 90%;
 }

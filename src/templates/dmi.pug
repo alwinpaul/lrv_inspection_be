@@ -6,25 +6,26 @@ html(lang='en')
         link(href='https://fonts.googleapis.com/css2?family=Roboto&display=swap' rel='stylesheet')
         link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css")
 
+        script(src="https://cdn.tailwindcss.com")
     body 
         section
         div.w83.m-auto.my-10
-            table.w-full.border.border-collapse.border-gray-200
+            table.w-full.border.border-gray-200
                 tbody.bg-white
                     each key, index in Object.keys(vehicleInfo)
                         tr(key=index)
-                            td.px-6.py-4.border.border-gray-200.font-semibold= key.replace(/_/g, ' ')
-                            td.px-6.py-4.border.border-gray-200= vehicleInfo[key]
+                            td.p-1.border.border-gray-200.font-semibold= key.replace(/_/g, ' ')
+                            td.p-1.border.border-gray-200= vehicleInfo[key]
 
-        div.flex.flex-row.justify-center.w-full
-            div.m-auto.w40.mx-3
+        div.flex.flex-row.justify-evenly.items-baseline
+            div.m-auto.w83.mx-3
                 div.my-5
-                    table.w-full.border.border-collapse.border-gray-200
+                    table.w-full.border.border-gray-200
                         thead
                             tr.bg-gray-50
-                            th.px-6.py-3.text-left.font-semibold.text-gray-500.uppercase.border.border-gray-200 Label
-                            th.px-6.py-3.text-left.font-semibold.text-gray-500.uppercase.border.border-gray-200 Cab A Value
-                            th.px-6.py-3.text-left.font-semibold.text-gray-500.uppercase.border.border-gray-200 Cab B Value
+                            th.px-6.py-3.text-left.font-bold.text-gray-900.uppercase.border.border-gray-200 Label
+                            th.px-6.py-3.text-left.font-bold.text-gray-900.uppercase.border.border-gray-200 Cab A Value
+                            th.px-6.py-3.text-left.font-bold.text-gray-900.uppercase.border.border-gray-200 Cab B Value
                         tbody.bg-white
                             each item in cabData
                                 tr(key=item._id)
@@ -41,12 +42,12 @@ html(lang='en')
                                             i.fas.fa-times
 
                 div.my-5
-                    table.w-full.border.border-collapse.border-gray-200
+                    table.w-full.border.border-gray-200
                         thead
                             tr.bg-gray-50
-                            th.px-6.py-3.text-left.font-semibold.text-gray-500.uppercase.border.border-gray-200 Label
-                            th.px-6.py-3.text-left.font-semibold.text-gray-500.uppercase.border.border-gray-200 Cab A Value
-                            th.px-6.py-3.text-left.font-semibold.text-gray-500.uppercase.border.border-gray-200 Cab B Value
+                            th.px-6.py-3.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Label
+                            th.px-6.py-3.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Cab A Value
+                            th.px-6.py-3.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Cab B Value
                         tbody.bg-white
                             each item in dddData
                                 tr(key=item._id)
@@ -62,13 +63,13 @@ html(lang='en')
                                         else
                                             i.fas.fa-times
 
-            div.m-auto.w40.mx-3
+            div.m-auto.w83.mx-3
                 div.my-5
-                    table.w-full.border.border-collapse.border-gray-200
+                    table.w-full.border.border-gray-200
                         thead
                             tr.bg-gray-50
-                            th.px-6.py-3.text-left.font-semibold.text-gray-500.uppercase.border.border-gray-200 Label
-                            th.px-6.py-3.text-left.font-semibold.text-gray-500.uppercase.border.border-gray-200 Value
+                            th.px-6.py-3.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Label
+                            th.px-6.py-3.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Value
                         tbody.bg-white
                             each item in psgData
                                 tr(key=item._id)
@@ -80,11 +81,11 @@ html(lang='en')
                                             i.fas.fa-times
 
                 div.my-5
-                    table.w-full.border.border-collapse.border-gray-200
+                    table.w-full.border.border-gray-200
                         thead
                             tr.bg-gray-50
-                            th.px-6.py-3.text-left.font-semibold.text-gray-500.uppercase.border.border-gray-200 Label
-                            th.px-6.py-3.text-left.font-semibold.text-gray-500.uppercase.border.border-gray-200 Value
+                            th.px-6.py-3.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Label
+                            th.px-6.py-3.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Value
                         tbody.bg-white
                             each item in exteriorData
                                 tr(key=item._id)
@@ -96,27 +97,27 @@ html(lang='en')
                                             i.fas.fa-times
 
 
-        div.flex.flex-row.items-center.justify-center.w83.m-auto
+        div.flex.flex-row.items-center.justify-center.mx-4
             each opData in exteriorOptionalData
                 div.block.border.border-slate-300.w30.h-22.p-2
-                    div.h-10.font-bold.text-sm.m-2.w90.w-full.text-left.text-center.p-2= opData.label
-                    div.m-2.w-full
+                    div.h-14.font-bold.text-sm.m-2.w90.w-full.text-left.text-center.p-2= opData.label
+                    div.flex.items-centre.justify-center
                         if opData.value
                             i.fas.fa-check
                         else
                             i.fas.fa-times                
 
-        div.flex.flex-col.items-start.justify-start.w-full.w83.m-auto.my-5
+        div.flex.flex-col.items-start.justify-start.w-full.w83.m-auto.m-5.border.border-slate-200
             div.font-bold.text-sm.m-2.w20.text-left Notes:
             div.m-2.text-left.w-full.w83= notes
 
-        div.flex.items-center.justify-start.w-full.w83.m-auto.my-5
+        div.flex.items-center.justify-start.w-full.w83.m-auto.m-5.border.border-slate-200
             div.font-bold.text-sm.m-2.w20.text-left Mileage:
             div.m-2.text-left.w83= mileage
 
-        div.flex.items-center.justify-start.w-full.w83.m-auto.my-5
-            div.font-bold.text-sm.m-2.w20.text-left Fit for service:
-            div.m-2.text-left.w83
+        div.flex.items-center.justify-start.w-full.w83.m-auto.m-5.border.border-slate-200
+            div.font-bold.text-2xl.m-2.w20.text-left Fit for service:
+            div.m-2.text-left.w83.text-2xl
                 if fitForService
                     i.fas.fa-check
                 else
