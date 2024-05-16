@@ -13,9 +13,9 @@ export class DmiService {
         private pdfService: PdfService) { }
 
     async saveDmiData(data: SaveFormDTO) {
-        console.log(data)
-        this.pdfService.generatepdf(data, `/dmi-${data.vehicleInfo.vehicle_id}-${Date.now()}`, 'dmi')
-        const newDmiData = new this.dmiModel(data)
+        const pdfPath = await this.pdfService.generatepdf(data, `/dmi-${data.vehicleInfo.vehicle_id}-${Date.now()}.pdf`, 'dmi')
+        const newData = { ...data, pdf: pdfPath }
+        const newDmiData = new this.dmiModel(newData)
         const result = await newDmiData.save()
         return result
     }

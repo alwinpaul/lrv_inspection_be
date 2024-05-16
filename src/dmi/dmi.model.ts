@@ -32,6 +32,7 @@ export const DmiSchema = new mongoose.Schema({
     mileage: Number,
     notes: String,
     fitForService: Boolean,
-    dateTime: Date
+    dateTime: Date,
+    pdf: String
 });
 

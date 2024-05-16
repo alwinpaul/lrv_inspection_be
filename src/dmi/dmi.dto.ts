@@ -10,6 +10,7 @@ export class SaveFormDTO {
     fitForService: boolean
     vehicleInfo: IVehicleInfo
     dateTime: string
+    pdf?: string
 }
 export interface IVehicleInfo {
     vehicle_id: null | string,

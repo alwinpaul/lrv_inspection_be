@@ -27,6 +27,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/mongoose": "^10.0.6",
     "@nestjs/platform-express": "^10.0.0",
+    "aws-sdk": "^2.1621.0",
     "cookie-parser": "^1.4.6",
     "fs-extra": "^11.2.0",
     "handlebars": "^4.7.8",
