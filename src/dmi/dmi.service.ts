@@ -13,7 +13,17 @@ export class DmiService {
         private pdfService: PdfService) { }
 
     async saveDmiData(data: SaveFormDTO) {
-        const pdfPath = await this.pdfService.generatepdf(data, `/dmi-${data.vehicleInfo.vehicle_id}-${Date.now()}.pdf`, 'dmi')
+        const pdfFormatData = {
+            ...data, dateTime: new Date(data.dateTime).toLocaleString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+            })
+        }
+        const pdfPath = await this.pdfService.generatepdf(pdfFormatData, `/dmi-${data.vehicleInfo.vehicle_id}-${Date.now()}.pdf`, 'dmi')
         const newData = { ...data, pdf: pdfPath }
         const newDmiData = new this.dmiModel(newData)
         const result = await newDmiData.save()

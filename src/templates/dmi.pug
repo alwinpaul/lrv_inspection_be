@@ -1,125 +1,143 @@
 html(lang='en')
     head
-        link(href='stylesheets/checklist.css' rel='stylesheet')
         link(rel='preconnect' href='https://fonts.googleapis.com')
         link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin)
         link(href='https://fonts.googleapis.com/css2?family=Roboto&display=swap' rel='stylesheet')
         link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css")
 
         script(src="https://cdn.tailwindcss.com")
-    body 
-        section
-        div.w83.m-auto.my-10
-            table.w-full.border.border-gray-200
+        style(type="text/css").
+            .w83 {
+                width: 500px;
+            }
+            .w40 {
+                width: 400px;
+            }
+            .w150px {
+                width: 150px;
+            }
+            .bg-keolis {
+                background-color: #6abbc7
+            }
+
+    body
+        div.outer-width.m-auto
+            div.flex.justify-between    
+                div.w40.m-auto.my-3.bg-keolis
+                    img(src='https://keolis.benchfix.com/assets/KEOLIS_R-COvfphCB.webp' alt='login' style='width:150px; height:50px;')
+                div.w40.m-auto.my-3
+                    table.border.border-gray-200.w-full
+                        tbody.bg-white
+                            each key, index in Object.keys(vehicleInfo)
+                                tr(key=index)
+                                    td.p-1.border.border-gray-200.font-semibold.text-xs= key.replace(/_/g, ' ')
+                                    td.p-1.border.border-gray-200.text-xs= vehicleInfo[key]
+                            tr
+                                td.p-1.border.border-gray-200.font-semibold.text-xs Date & Time
+                                td.p-1.border.border-gray-200.text-xs= dateTime
+
+            div.flex.flex-row.justify-evenly.items-baseline
+                div.w40.mx-3
+                    div.my-5
+                        table.w-full.border.border-gray-200
+                            thead
+                                tr.bg-gray-50
+                                th.p-1.text-xs.text-left.font-bold.text-gray-900.uppercase.border.border-gray-200 Cab Condition and Function
+                                th.p-1.text-xs.text-left.font-bold.text-gray-900.uppercase.border.border-gray-200 Cab A
+                                th.p-1.text-xs.text-left.font-bold.text-gray-900.uppercase.border.border-gray-200 Cab B
+                            tbody.bg-white
+                                each item in cabData
+                                    tr(key=item._id)
+                                        td.p-1.border.border-gray-200.text-xs= item.label
+                                        td.p-1.border.border-gray-200.text-xs
+                                            if item.cab_a_value
+                                                i.fas.fa-check
+                                            else
+                                                i.fas.fa-times
+                                        td.p-1.border.border-gray-200.text-xs
+                                            if item.cab_b_value
+                                                i.fas.fa-check
+                                            else
+                                                i.fas.fa-times
+
+                    div.my-5
+                        table.w-full.border.border-gray-200
+                            thead
+                                tr.bg-gray-50
+                                th.p-1.text-xs.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 DDD
+                                th.p-1.text-xs.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Cab A
+                                th.p-1.text-xs.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Cab B
+                            tbody.bg-white
+                                each item in dddData
+                                    tr(key=item._id)
+                                        td.p-1.border.border-gray-200.text-xs= item.label
+                                        td.p-1.border.border-gray-200.text-xs
+                                            if item.cab_a_value
+                                                i.fas.fa-check
+                                            else
+                                                i.fas.fa-times
+                                        td.p-1.border.border-gray-200.text-xs
+                                            if item.cab_b_value
+                                                i.fas.fa-check
+                                            else
+                                                i.fas.fa-times
+
+                div.w40.mx-3
+                    div.my-5
+                        table.w-full.border.border-gray-200
+                            thead
+                                tr.bg-gray-50
+                                th.p-1.text-xs.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Passenger Compartment Condition and Function
+                                th.p-1.text-xs.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Value
+                            tbody.bg-white
+                                each item in psgData
+                                    tr(key=item._id)
+                                        td.p-1.border.border-gray-200.text-xs= item.label
+                                        td.p-1.border.border-gray-200.text-xs
+                                            if item.value
+                                                i.fas.fa-check
+                                            else
+                                                i.fas.fa-times
+
+                    div.my-5
+                        table.w-full.border.border-gray-200
+                            thead
+                                tr.bg-gray-50
+                                th.p-1.text-xs.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Vehicle Exterior Condition
+                                th.p-1.text-xs.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Value
+                            tbody.bg-white
+                                each item in exteriorData
+                                    tr(key=item._id)
+                                        td.p-1.border.border-gray-200.text-xs= item.label
+                                        td.p-1.border.border-gray-200.text-xs
+                                            if item.value
+                                                i.fas.fa-check
+                                            else
+                                                i.fas.fa-times
+
+
+            div.flex.flex-row.items-center.justify-center.mx-4.text-xs
+                each opData in exteriorOptionalData
+                    div.block.border.border-slate-300.h-18.p-2
+                        div.h-6.font-bold.text-xs.m-1.w-full.text-left.text-center.p-1= opData.label
+                        div.py-2.flex.items-centre.justify-center.border-slate-200.text-xs
+                            if opData.value
+                                i.fas.fa-check
+                            else
+                                i.fas.fa-minus            
+
+            table.border.border-gray-200.w-full.m-3.mt-5
                 tbody.bg-white
-                    each key, index in Object.keys(vehicleInfo)
-                        tr(key=index)
-                            td.p-1.border.border-gray-200.font-semibold= key.replace(/_/g, ' ')
-                            td.p-1.border.border-gray-200= vehicleInfo[key]
-
-        div.flex.flex-row.justify-evenly.items-baseline
-            div.m-auto.w83.mx-3
-                div.my-5
-                    table.w-full.border.border-gray-200
-                        thead
-                            tr.bg-gray-50
-                            th.px-6.py-3.text-left.font-bold.text-gray-900.uppercase.border.border-gray-200 Label
-                            th.px-6.py-3.text-left.font-bold.text-gray-900.uppercase.border.border-gray-200 Cab A Value
-                            th.px-6.py-3.text-left.font-bold.text-gray-900.uppercase.border.border-gray-200 Cab B Value
-                        tbody.bg-white
-                            each item in cabData
-                                tr(key=item._id)
-                                    td.px-6.py-4.border.border-gray-200= item.label
-                                    td.px-6.py-4.border.border-gray-200
-                                        if item.cab_a_value
-                                            i.fas.fa-check
-                                        else
-                                            i.fas.fa-times
-                                    td.px-6.py-4.border.border-gray-200
-                                        if item.cab_b_value
-                                            i.fas.fa-check
-                                        else
-                                            i.fas.fa-times
-
-                div.my-5
-                    table.w-full.border.border-gray-200
-                        thead
-                            tr.bg-gray-50
-                            th.px-6.py-3.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Label
-                            th.px-6.py-3.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Cab A Value
-                            th.px-6.py-3.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Cab B Value
-                        tbody.bg-white
-                            each item in dddData
-                                tr(key=item._id)
-                                    td.px-6.py-4.border.border-gray-200= item.label
-                                    td.px-6.py-4.border.border-gray-200
-                                        if item.cab_a_value
-                                            i.fas.fa-check
-                                        else
-                                            i.fas.fa-times
-                                    td.px-6.py-4.border.border-gray-200
-                                        if item.cab_b_value
-                                            i.fas.fa-check
-                                        else
-                                            i.fas.fa-times
-
-            div.m-auto.w83.mx-3
-                div.my-5
-                    table.w-full.border.border-gray-200
-                        thead
-                            tr.bg-gray-50
-                            th.px-6.py-3.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Label
-                            th.px-6.py-3.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Value
-                        tbody.bg-white
-                            each item in psgData
-                                tr(key=item._id)
-                                    td.px-6.py-4.border.border-gray-200= item.label
-                                    td.px-6.py-4.border.border-gray-200
-                                        if item.value
-                                            i.fas.fa-check
-                                        else
-                                            i.fas.fa-times
-
-                div.my-5
-                    table.w-full.border.border-gray-200
-                        thead
-                            tr.bg-gray-50
-                            th.px-6.py-3.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Label
-                            th.px-6.py-3.text-left.font-semibold.text-gray-900.uppercase.border.border-gray-200 Value
-                        tbody.bg-white
-                            each item in exteriorData
-                                tr(key=item._id)
-                                    td.px-6.py-4.border.border-gray-200= item.label
-                                    td.px-6.py-4.border.border-gray-200
-                                        if item.value
-                                            i.fas.fa-check
-                                        else
-                                            i.fas.fa-times
-
-
-        div.flex.flex-row.items-center.justify-center.mx-4
-            each opData in exteriorOptionalData
-                div.block.border.border-slate-300.w30.h-22.p-2
-                    div.h-14.font-bold.text-sm.m-2.w90.w-full.text-left.text-center.p-2= opData.label
-                    div.flex.items-centre.justify-center
-                        if opData.value
-                            i.fas.fa-check
-                        else
-                            i.fas.fa-times                
-
-        div.flex.flex-col.items-start.justify-start.w-full.w83.m-auto.m-5.border.border-slate-200
-            div.font-bold.text-sm.m-2.w20.text-left Notes:
-            div.m-2.text-left.w-full.w83= notes
-
-        div.flex.items-center.justify-start.w-full.w83.m-auto.m-5.border.border-slate-200
-            div.font-bold.text-sm.m-2.w20.text-left Mileage:
-            div.m-2.text-left.w83= mileage
-
-        div.flex.items-center.justify-start.w-full.w83.m-auto.m-5.border.border-slate-200
-            div.font-bold.text-2xl.m-2.w20.text-left Fit for service:
-            div.m-2.text-left.w83.text-2xl
-                if fitForService
-                    i.fas.fa-check
-                else
-                    i.fas.fa-times 
-
+                    tr
+                        td.p-1.border.border-gray-200.font-semibold.text-xs Notes
+                        td.p-1.border.border-gray-200.text-xs= notes
+                    tr
+                        td.p-1.border.border-gray-200.font-semibold.text-xs Mileage
+                        td.p-1.border.border-gray-200.text-xs= mileage
+                    tr
+                        td.p-1.border.border-gray-200.font-bold.text-sm Fit for service:
+                        td.p-1.border.border-gray-200.text-sm
+                            if fitForService
+                                i.fas.fa-check
+                            else
+                                i.fas.fa-times
