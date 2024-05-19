@@ -19,7 +19,7 @@ export class AuthController {
       httpOnly: true,
       secure: false,
       sameSite: 'lax',
-      expires: new Date(Date.now() + 1 * 6 * 60 * 60 * 1000),
+      expires: new Date(Date.now() + 1 * 6 * 60 * 1000),
     }).json(result.userDetails)
   }
 

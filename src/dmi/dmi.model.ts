@@ -33,6 +33,7 @@ export const DmiSchema = new mongoose.Schema({
     notes: String,
     fitForService: Boolean,
     dateTime: Date,
-    pdf: String
+    pdf: String,
+    initials: String
 });
 

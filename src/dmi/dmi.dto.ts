@@ -11,6 +11,7 @@ export class SaveFormDTO {
     vehicleInfo: IVehicleInfo
     dateTime: string
     pdf?: string
+    initials: string
 }
 export interface IVehicleInfo {
     vehicle_id: null | string,

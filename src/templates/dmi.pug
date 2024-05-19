@@ -124,13 +124,14 @@ html(lang='en')
                             if opData.value
                                 i.fas.fa-check
                             else
-                                i.fas.fa-minus            
+                                i.fas.fa-minus   
+
+            div.flex.justify-start.m-4.text-xs 
+                div.h-6.font-bold.text-xs.m-1.text-left.p-1 Notes
+                div.py-2.flex.items-centre.justify-center.border-slate-200.text-xs= notes
 
             table.border.border-gray-200.w-full.m-3.mt-5
                 tbody.bg-white
-                    tr
-                        td.p-1.border.border-gray-200.font-semibold.text-xs Notes
-                        td.p-1.border.border-gray-200.text-xs= notes
                     tr
                         td.p-1.border.border-gray-200.font-semibold.text-xs Mileage
                         td.p-1.border.border-gray-200.text-xs= mileage
@@ -141,3 +142,7 @@ html(lang='en')
                                 i.fas.fa-check
                             else
                                 i.fas.fa-times
+
+            div.flex.justify-end.mx-8.text-xs 
+                div.h-6.font-bold.text-xs.m-1.text-left.p-1 Initails:
+                div.py-2.flex.items-centre.justify-center.border-slate-200.text-xs= initials
