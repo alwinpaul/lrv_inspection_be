@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { toZonedTime } from "date-fns-tz";
 import { SaveFormDTO } from './dmi.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -13,8 +14,11 @@ export class DmiService {
         private pdfService: PdfService) { }
 
     async saveDmiData(data: SaveFormDTO) {
+        const date = new Date(data.dateTime)
+        const timeZone = "America/Toronto";
+        const zonedDate = toZonedTime(date, timeZone);
         const pdfFormatData = {
-            ...data, dateTime: new Date(data.dateTime).toLocaleString("en-US", {
+            ...data, dateTime: zonedDate.toLocaleString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
