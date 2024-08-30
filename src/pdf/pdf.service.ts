@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable, ServiceUnavailableException } fr
 import puppeteer from 'puppeteer';
 import * as path from 'path';
 import * as pug from 'pug';
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import * as AWS from 'aws-sdk';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
@@ -17,7 +17,7 @@ export class PdfService {
         secretAccessKey: this.configService.get<string>('SECRET_KEY_AWS'),
         region: this.configService.get<string>('AWS_REGION'),
     }
-    s3 = new S3Client(this.awsConfig)
+    s3 = new AWS.S3(this.awsConfig)
 
     async compile<T>(templateName: string, data: T) {
         try {
@@ -52,23 +52,23 @@ export class PdfService {
         const bucket = this.configService.get<string>('BUCKET_NAME')
         const key = `pdf/${filename}`
 
-        const s3Params = new PutObjectCommand({
+        const s3Params = {
             Bucket: bucket,
             Key: key,
             Body: pdf,
             ContentType: 'application/pdf',
             ServerSideEncryption: 'AES256'
-        })
+        }
 
-        const [res, region] = await Promise.all([
-            this.s3.send(s3Params),
-            this.s3.config.region(),
-        ]);
-
-        const url = `https://${bucket}.s3.${region}.amazonaws.com/${key}`
-        console.log(url)
         return new Promise((resolve) => {
-            resolve(url)
+            this.s3.upload(s3Params, (err, data) => {
+                if (err) {
+                    console.log(err)
+                    throw new HttpException('pdf upload failed!', HttpStatus.PRECONDITION_FAILED)
+                }
+                resolve(data.Location)
+            })
         })
+
     }
 }
