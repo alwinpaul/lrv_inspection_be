@@ -15,7 +15,7 @@ export class PdfService {
     awsConfig = {
         accessKeyId: this.configService.get<string>('ACCESS_KEY_AWS'),
         secretAccessKey: this.configService.get<string>('SECRET_KEY_AWS'),
-        region: this.configService.get<string>('AWS_REGION'),
+        region: this.configService.get<string>('REGION_AWS'),
     }
     s3 = new AWS.S3(this.awsConfig)
 

@@ -1,0 +1,31 @@
+service: lrv-be
+
+useDotenv: true
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  environment:
+    MONGODB_URI: ${env:MONGODB_URI}
+    AUTH_SECRET: ${env:AUTH_SECRET}
+    ACCESS_KEY_AWS: ${env:ACCESS_KEY_AWS}
+    SECRET_KEY_AWS: ${env:SECRET_KEY_AWS}
+    REGION_AWS: ${env:REGION_AWS}
+    BUCKET_NAME: ${env:BUCKET_NAME}
+
+functions:
+  main:
+    handler: dist/serverless.handler
+    events:
+      - http:
+          method: ANY
+          path: /
+      - http:
+          method: ANY
+          path: '{proxy+}'
+
+
+
