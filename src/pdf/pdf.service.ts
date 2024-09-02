@@ -33,7 +33,7 @@ export class PdfService {
     }
 
     async generatepdf<T>(data: T, fileName: string, template: string) {
-        const browser = await puppeteer.launch()
+        const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
         const page = await browser.newPage()
         const content = await this.compile(template, data)
         await page.setContent(content)
