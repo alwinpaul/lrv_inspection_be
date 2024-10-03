@@ -2,10 +2,10 @@ import * as mongoose from 'mongoose';
 
 export const DmiSchema = new mongoose.Schema({
     vehicleInfo: {
-        vehicle_id: null || String,
-        technician_id_1: null || String,
-        technician_id_2: null || String,
-        work_order_number: null || String
+        vehicle_id: String || null,
+        technician_id_1: String || null,
+        technician_id_2: String || null,
+        work_order_number: String || null
     },
     cabData: [{
         label: String,
